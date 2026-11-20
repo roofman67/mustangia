@@ -62,6 +62,7 @@ lb config \
     --iso-publisher "Mustangia" \
     --iso-volume "MUSTANGIA_26_04_1_AMD64" \
     --linux-packages linux-image \
+    --memtest none \
     --mirror-bootstrap "https://archive.ubuntu.com/ubuntu/" \
     --mirror-binary "https://archive.ubuntu.com/ubuntu/" \
     --mirror-binary-security "https://security.ubuntu.com/ubuntu/" \
