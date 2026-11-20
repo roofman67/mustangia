@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Mustangia Welcome
+Comment=Student help, desktop selection, and lab starters
+Exec=/usr/local/bin/mustangia-welcome
+X-GNOME-Autostart-enabled=true
