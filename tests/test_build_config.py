@@ -11,7 +11,7 @@ class BuildConfigurationTests(unittest.TestCase):
         self.assertIn("--distribution resolute", build_script)
         self.assertIn("--mode ubuntu", build_script)
         self.assertIn("--initramfs casper", build_script)
-        self.assertIn("--linux-packages linux-image-generic", build_script)
+        self.assertIn("--linux-packages linux-image", build_script)
         self.assertIn("--binary-images iso-hybrid", build_script)
 
     def test_one_image_contains_both_desktops_and_gdm_default(self):
