@@ -1,0 +1,57 @@
+name: Build Mustangia ISO
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/build-iso.yml"
+      - "README.md"
+      - "build.sh"
+      - "docs/**"
+      - "labs/**"
+      - "live-build-config/**"
+      - "scripts/**"
+      - "tests/**"
+      - "welcome/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-iso.yml"
+      - "README.md"
+      - "build.sh"
+      - "docs/**"
+      - "labs/**"
+      - "live-build-config/**"
+      - "scripts/**"
+      - "tests/**"
+      - "welcome/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install live-image build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y live-build debootstrap xorriso squashfs-tools \
+            syslinux-common isolinux grub-pc-bin grub-efi-amd64-bin mtools
+      - name: Run project tests
+        run: |
+          python3 -m unittest discover -s tests -v
+          bash -n build.sh scripts/validate-iso.sh
+      - name: Build ISO
+        run: sudo bash ./build.sh
+      - name: Validate ISO and checksum
+        run: bash ./scripts/validate-iso.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mustangia-26.04.1-amd64-iso
+          path: |
+            dist/mustangia-26.04.1-amd64.iso
+            dist/mustangia-26.04.1-amd64.iso.sha256
+          if-no-files-found: error
