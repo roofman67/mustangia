@@ -6,9 +6,12 @@ Mustangia is a computer-science student live Linux image built from Ubuntu 26.04
 
 - **GNOME and KDE Plasma** are installed together. GDM is the single display manager and GNOME is the default session. At the GDM sign-in screen, use the session/gear menu to select **Plasma (X11 or Wayland, if offered)**. Log out to return to the sign-in screen and change sessions.
 - Core tools cover C/C++, Python, Java, JavaScript/Node.js, Go, Rust, Git, debuggers, build systems, SQLite, and QEMU.
-- A GTK welcome app provides desktop-selection guidance, student help, lab-template launchers, and optional-bundle instructions.
+- The system includes GRUB/Syslinux boot support, Ubuntu's `linux-generic` kernel stream, systemd, networking/audio/printing services, Wayland with X.Org compatibility, and GNOME Software/KDE Discover application catalogs.
+- A GTK welcome app describes the system components and applications, provides desktop-selection guidance and student help, and launches lab templates and optional-bundle instructions.
 - `mustangia-lab` creates starter projects for Python, web, systems, and data-science coursework.
-- `mustangia-bundle install web|data-science|systems` installs optional packages from Ubuntu repositories when the machine is online.
+- `mustangia-bundle install <name>` installs optional web, data-science, systems, study/office, media, or extra-terminal packages from Ubuntu repositories when online.
+
+Firefox comes with the Ubuntu desktop. Third-party applications such as Brave, VS Code, Zotero, Obsidian, and ONLYOFFICE are not configured as extra package repositories; install them only from their official publishers if required. The optional media bundle focuses on ordinary media playback and personal/local reading. Anime streaming/downloader tools are not included.
 
 ## Build the ISO
 

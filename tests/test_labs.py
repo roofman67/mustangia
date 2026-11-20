@@ -78,7 +78,8 @@ class LabCreationTests(unittest.TestCase):
 
     def test_optional_bundle_names_are_explicit(self):
         self.assertEqual(
-            tuple(BUNDLES), ("web", "data-science", "systems")
+            tuple(BUNDLES),
+            ("web", "data-science", "systems", "study", "media", "terminals"),
         )
 
 

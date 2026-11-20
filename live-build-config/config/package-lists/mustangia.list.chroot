@@ -9,11 +9,18 @@ live-config-systemd
 systemd-sysv
 ubuntu-desktop-minimal
 gdm3
+network-manager
+pipewire
+wireplumber
+cups
+xserver-xorg
 plasma-desktop
 dolphin
 konsole
 systemsettings
 plasma-nm
+gnome-software
+plasma-discover
 
 # GTK runtime for the student welcome application
 python3-gi

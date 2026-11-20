@@ -23,6 +23,9 @@ class BuildConfigurationTests(unittest.TestCase):
         names = {line.strip() for line in packages if line.strip() and not line.startswith("#")}
         self.assertIn("ubuntu-desktop-minimal", names)
         self.assertIn("plasma-desktop", names)
+        self.assertIn("xserver-xorg", names)
+        self.assertIn("gnome-software", names)
+        self.assertIn("plasma-discover", names)
         self.assertEqual(len(names), len([line for line in packages if line.strip() and not line.startswith("#")]))
         preseed = (
             ROOT / "live-build-config" / "config" / "preseed" / "desktop.cfg"
@@ -55,6 +58,15 @@ class BuildConfigurationTests(unittest.TestCase):
                 "lldb",
             }.issubset(names)
         )
+
+    def test_welcome_gui_describes_system_components_and_apps(self):
+        welcome = (ROOT / "welcome" / "mustangia_welcome.py").read_text()
+        for component in ("GRUB", "Syslinux", "systemd", "PipeWire", "GNOME", "KDE Plasma"):
+            with self.subTest(component=component):
+                self.assertIn(component, welcome)
+        for app in ("LibreOffice", "Anki", "VLC", "Neovim", "Brave", "Zotero"):
+            with self.subTest(app=app):
+                self.assertIn(app, welcome)
 
 
 if __name__ == "__main__":

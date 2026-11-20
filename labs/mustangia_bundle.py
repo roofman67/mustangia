@@ -24,6 +24,26 @@ BUNDLES = {
         "valgrind",
         "binutils",
     ),
+    "study": (
+        "libreoffice-writer",
+        "libreoffice-calc",
+        "libreoffice-impress",
+        "anki",
+        "foliate",
+        "kbruch",
+        "kig",
+        "kalzium",
+    ),
+    "media": (
+        "vlc",
+        "mpv",
+        "obs-studio",
+        "mcomix",
+        "lollypop",
+        "clementine",
+        "conky",
+    ),
+    "terminals": ("neovim", "alacritty", "kitty"),
 }
 
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
+import platform
 
 import gi
 
@@ -30,7 +31,11 @@ class MustangiaWelcome(Gtk.Window):
             ),
             Gtk.Label(label="Welcome"),
         )
+        notebook.append_page(
+            self.make_components_page(), Gtk.Label(label="System components")
+        )
         notebook.append_page(self.make_desktop_page(), Gtk.Label(label="Desktops"))
+        notebook.append_page(self.make_apps_page(), Gtk.Label(label="Applications"))
         notebook.append_page(self.make_labs_page(), Gtk.Label(label="Lab starters"))
         notebook.append_page(self.make_bundles_page(), Gtk.Label(label="Optional bundles"))
         notebook.append_page(self.make_help_page(), Gtk.Label(label="Help"))
@@ -56,6 +61,36 @@ class MustangiaWelcome(Gtk.Window):
         return page
 
     @classmethod
+    def make_components_page(cls):
+        return cls.make_text_page(
+            "Bootloader: GRUB on UEFI, Syslinux on legacy BIOS\n"
+            f"Linux kernel: Ubuntu linux-generic ({platform.release()})\n"
+            "Init system: systemd\n"
+            "Background services: NetworkManager for networking, PipeWire and "
+            "WirePlumber for audio, CUPS for printing\n"
+            "Graphics: Wayland desktop sessions with X.Org compatibility\n"
+            "Desktop environments: GNOME (default) and KDE Plasma\n"
+            "Application catalogs: GNOME Software and KDE Discover"
+        )
+
+    @classmethod
+    def make_apps_page(cls):
+        return cls.make_text_page(
+            "Included development tools\n"
+            "GCC/G++, Clang, Python 3, Java, Node.js, Go, Rust, Git, GitHub CLI, "
+            "GDB, LLDB, CMake, SQLite, and QEMU.\n\n"
+            "Available as optional Ubuntu packages\n"
+            "Study: LibreOffice, Anki, Foliate, KBruch, Kig, and Kalzium.\n"
+            "Media: VLC, MPV, OBS Studio, MComix, Lollypop, Clementine, and Conky.\n"
+            "Terminals/editors: Konsole is included; Neovim, Alacritty, and Kitty "
+            "are optional.\n\n"
+            "Firefox is supplied by the Ubuntu desktop. Brave, VS Code, Zotero, "
+            "Obsidian, and ONLYOFFICE use vendor distribution channels and are "
+            "not silently added as third-party repositories. Install them only "
+            "from their official publishers if needed."
+        )
+
+    @classmethod
     def make_labs_page(cls):
         page = cls.make_text_page(
             "Create a starter project in ~/MustangiaLabs. The command refuses to "
@@ -74,8 +109,16 @@ class MustangiaWelcome(Gtk.Window):
             "internet connection. Select a command to copy it, then run it in a "
             "terminal and review the packages before confirming."
         )
-        for slug in ("web", "data-science", "systems"):
-            button = Gtk.Button(label=f"Copy install command for {slug}")
+        bundle_labels = {
+            "web": "Web development",
+            "data-science": "Data science",
+            "systems": "Systems",
+            "study": "Study and office",
+            "media": "Media and local manga reading",
+            "terminals": "Extra terminals and editor",
+        }
+        for slug, label in bundle_labels.items():
+            button = Gtk.Button(label=f"Copy install command for {label}")
             button.connect("clicked", cls.on_copy_bundle, slug)
             page.pack_start(button, False, False, 0)
         return page
@@ -88,7 +131,8 @@ class MustangiaWelcome(Gtk.Window):
             "• C/C++: gcc --version and g++ --version\n"
             "• Git: git --help\n"
             "• List lab types: mustangia-lab list\n"
-            "• Install optional packages: mustangia-bundle install web|data-science|systems\n\n"
+            "• List optional packages: mustangia-bundle list\n"
+            "• Install a bundle: mustangia-bundle install <name>\n\n"
             "This is a live system. Save coursework to another drive or network location; "
             "changes may be lost when you shut down."
         )
