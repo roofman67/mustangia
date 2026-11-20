@@ -2,10 +2,8 @@
 linux-generic
 linux-firmware
 
-# Live boot and desktop sessions
-live-boot
-live-config
-live-config-systemd
+# Ubuntu live boot and desktop sessions
+casper
 systemd-sysv
 ubuntu-desktop-minimal
 gdm3

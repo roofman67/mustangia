@@ -9,6 +9,8 @@ class BuildConfigurationTests(unittest.TestCase):
     def test_targets_ubuntu_resolute_and_ubuntu_kernel(self):
         build_script = (ROOT / "build.sh").read_text()
         self.assertIn("--distribution resolute", build_script)
+        self.assertIn("--mode ubuntu", build_script)
+        self.assertIn("--initramfs casper", build_script)
         self.assertIn("--linux-packages linux-image-generic", build_script)
         self.assertIn("--binary-images iso-hybrid", build_script)
 

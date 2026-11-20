@@ -52,11 +52,11 @@ lb config \
     --archive-areas "main universe restricted multiverse" \
     --apt-recommends true \
     --binary-images iso-hybrid \
-    --bootappend-live "boot=live components username=mustangia hostname=mustangia locales=en_US.UTF-8 keyboard-layouts=us" \
-    --bootloaders "grub-efi,syslinux" \
-    --debian-installer none \
+    --bootappend-live "boot=casper username=mustangia hostname=mustangia locales=en_US.UTF-8 keyboard-layouts=us" \
+    --bootloader grub \
+    --debian-installer false \
     --distribution resolute \
-    --initramfs live-boot \
+    --initramfs casper \
     --iso-application "Mustangia Student Linux" \
     --iso-preparer "Mustangia ISO Builder" \
     --iso-publisher "Mustangia" \
@@ -67,7 +67,7 @@ lb config \
     --mirror-binary-security "https://security.ubuntu.com/ubuntu/" \
     --mirror-chroot "https://archive.ubuntu.com/ubuntu/" \
     --mirror-chroot-security "https://security.ubuntu.com/ubuntu/" \
-    --uefi-secure-boot disable
+    --mode ubuntu
 
 lb build
 
